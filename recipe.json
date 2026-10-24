@@ -1,0 +1,52 @@
+{
+ "name": "small",
+ "title": "Small (Virgo Software, 1993; Risc PC release)",
+ "platform": "acorn-archimedes",
+ "doc": "A recipe: how to turn a user's own copy of the game into a native executable. It holds no game data: the inputs are recognised by content (see $SS/tools/weave.py).",
+ "inputs": {
+  "containers": {},
+  "formats": [
+   "adf"
+  ]
+ },
+ "discs": [
+  {
+   "name": "disc1",
+   "title": "Small (1993)(Virgo)(RISC PC)",
+   "known_images": [
+    "3c0e2497149ef7dabb50309a362dde08fa3eb98ae00b62bec20ea1613d3325c8"
+   ],
+   "key_files": {
+    "!Small/CODE": "4243168cab7591f86026cdef9baccf8828b61ac0a208faace0dcc5b0965cd43b",
+    "!Small/!Image": "0470e3944239c662b7bd7ccd501e52d049fe85bdc54cf458147a03bc859c0b5b",
+    "!Small/Welcome": "12e0211cdf159df7d68f1aebb84ba3546f5a2e2847a9b4359b2c361590d7a5be",
+    "!Small/Congrat": "6ee5d2dd495f19350d981929f18271ba94ec3253087a4a119b44ef8ca067f301",
+    "!Small/pl": "6c57a4146cf71c063081fb72d3aefca5814f935c4115565eeb64f56ceb7e5100",
+    "!Small/V": "ee3ae5258135be8666220f40f0e8d35d66051a991d3b36ef4fa07d4851eee767",
+    "!Small/X": "4cab7b45198a8f8b6cdf477e97471584a5ad6f676b221ceb19c4ede355315643",
+    "!Small/S": "a488e805d398d83e95344b9de4c51a8d7470968be28b912b6a1519e8490d3f68",
+    "!Small/data": "ceafb58b834d0a91701e9f4c7b28b7f5a5a78696f5173a78441fe529b5676dcc"
+   },
+   "game_dirs": [
+    "!Small"
+   ]
+  }
+ ],
+ "build": [
+  "python3 -I \"$WEAVE\" extract . INPUTS",
+  "python3 -I tools/images.py analyse gen",
+  "make -C recomp"
+ ],
+ "output": "recomp/small",
+ "requires": {
+  "superspider": "~/stuff/superspider, or $SUPERSPIDER (dune build): analyse, gen, tools/bas2c.py, tools/weave.py",
+  "libroger": "~/stuff/libroger, or make ROGER=...",
+  "host": [
+   "python3",
+   "ocaml + dune",
+   "gcc",
+   "SDL3 (pkg-config sdl3)"
+  ]
+ },
+ "run": "cd recomp && ./small"
+}
